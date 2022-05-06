@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block con %}
+
+    <div class="container mt-5 mb-5"  style="font-size: 20px; font-weight: bold;">
+        <h1><b>정보수정</b></h1>
+    
+            <div class="mb-3 mt-5">
+                <label class="form-label">USERNAME</label>
+                <input type="text" disabled class="form-control" value="{{ user.username }}" name="uname">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">PASSWORD</label>
+                <input type="password" class="form-control" name="upass">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">EMAIL</label>
+                <input type="text" class="form-control" name="umail">
+            </div>
+        <div class="mb-3">
+                <label class="form-label">COMMENT</label>
+                <textarea class="form-control" name="ucom">{{ user.comment }}</textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">USERPIC</label>
+                <input type="file" class="form-control" name="upic">
+            </div>
+            <div class="text-end">
+                <a href="{% url 'acc:profile' %}"><button type="button" class="btn btn-dark">BACK</button></a>
+                <button class="btn btn-dark">UPDATE</button>
+            </div>
+
+    </div>
+{% endblock %}

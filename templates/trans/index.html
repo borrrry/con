@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block con %}
+    <div class="container mt-5 mb-5">
+        <h1><b>번역</b></h1>
+        <form method="post" name="transForm">
+            {% csrf_token %}
+            <div class="row mt-5">
+                <div class="col-lg-5">
+                    <textarea class="form-control" style="height: 300px; font-size: 30px;" name="intrans">{{i}}</textarea>
+                </div>
+                <div class="col-lg-2 text-center">
+                    <select class="form-select" name="insec" size="5" aria-label="size 3 select example">
+                        <option selected>번역할 언어</option>
+                        {% for k,v in nd.items %}
+                        <option value="{{k}}" {% if insec %} {% if insec == k %} selected {% endif %} {% else %} {% if k == 'en' %} selected {% endif %}{% endif %}>{{v|upper}}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="button" onclick="trans()" class="btn btn-dark mb-3 mt-3">번역하기</button>
+                    <select class="form-select" name="outsec" size="5" aria-label="size 3 select example">
+                        <option selected>번역한 언어</option>
+                        {% for k,v in nd.items %}
+                        <option value="{{k}}" {% if outsec %} {% if outsec == k %} selected {% endif %}  {% else %} {% if k == 'ko' %} selected {% endif %}{% endif %}>{{v|upper}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-lg-5">
+                    <textarea class="form-control" disabled style="height: 300px; font-size: bold;">{{o}}</textarea>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function trans(){
+            t = document.transForm;
+            if(!t.intrans.value){
+                alert("번역할 내용을 입력하세요.");
+            }else if(t.insect.value == t.outsec.value){
+                alert("서로 다른 나라를 선택해주세요");
+            }else{
+                t.submit();
+            }
+        }
+    </script>
+{% endblock %}
